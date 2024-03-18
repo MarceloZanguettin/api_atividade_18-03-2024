@@ -1,0 +1,8 @@
+POST https://8080-marcelozang-apiatividad-bfvruazt21m.ws-us110.gitpod.io/alunos
+Content-Type: application/json
+
+{
+    "nome": "Tiago Antonio",
+    "idade": 57,
+    "curso": "Educação Física"
+}
