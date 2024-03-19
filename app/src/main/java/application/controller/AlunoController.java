@@ -39,13 +39,16 @@ public class AlunoController {
 
     @PutMapping("/alunos/{id}")
     public Aluno putAluno(@RequestBody Aluno aluno, @PathVariable Long id) {
-        Aluno resposta = alunoRepo.findById(id).get();
+        Optional<Aluno> resposta = alunoRepo.findById(id);
+        if (resposta.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
 
-        resposta.setNome(aluno.getNome());
-        resposta.setIdade(aluno.getIdade());
-        resposta.setCurso(aluno.getCurso());
+        resposta.get().setNome(aluno.getNome());
+        resposta.get().setIdade(aluno.getIdade());
+        resposta.get().setCurso(aluno.getCurso());
 
-        return alunoRepo.save(resposta);
+        return alunoRepo.save(resposta.get());
     }
 
     @DeleteMapping("/alunos/{id}")
